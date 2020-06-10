@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card {
+  background-color: rgb(32, 196, 218);
+  width: 75%;
+  margin: auto;
+}
