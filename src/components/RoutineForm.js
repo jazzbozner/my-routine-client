@@ -25,7 +25,7 @@ class RoutineForm extends Component {
   handleChecked = (event) => {
     const { exercises, selectedExercises } = this.state
     const { value } = event.target
-    exercises.map(exercise => {
+    return exercises.map(exercise => {
       if (exercise.name === value && !selectedExercises.includes(exercise)) {
         this.setState(prevState => {
           return {selectedExercises: [...prevState.selectedExercises, exercise ]}
@@ -40,7 +40,14 @@ class RoutineForm extends Component {
   
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.onAddRoutine(this.state)
+    const routine = {
+      name: this.state.name,
+      description: this.state.description,
+      intensity: this.state.intensity,
+      user_id: 1,
+      selected_exercises: this.state.selectedExercises
+      }
+    this.props.onAddRoutine(routine)
   }
 
   fetchExercises = () => {
