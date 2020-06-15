@@ -31,7 +31,7 @@ class RoutineContainer extends Component {
   // Post Routine
   addRoutine = (routine) => {
     console.log(routine)
-    fetch(API_ROOT + '/users/1/routines', {
+    fetch(API_ROOT + '/routines', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -41,9 +41,10 @@ class RoutineContainer extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-      this.setState(prev => {
-      return {routines: [...prev.routines, data]}
-      })
+      console.log(data)
+      // this.setState(prev => {
+      // return {routines: [...prev.routines, data]}
+      // })
     })
   }
 

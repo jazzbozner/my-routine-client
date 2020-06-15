@@ -45,7 +45,7 @@ class RoutineForm extends Component {
       description: this.state.description,
       intensity: this.state.intensity,
       user_id: 1,
-      selected_exercises: this.state.selectedExercises
+      exercises_attributes: this.state.selectedExercises
       }
     this.props.onAddRoutine(routine)
   }
