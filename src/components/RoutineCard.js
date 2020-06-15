@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class RoutineCard extends Component {
 
   handleClick = () => {
-    console.log(this.props.routine.name)
+    console.log(this.props.routine)
   }
 
   render() {

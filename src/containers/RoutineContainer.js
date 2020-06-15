@@ -29,14 +29,28 @@ class RoutineContainer extends Component {
   }
 
   // Post Routine
-  addRoutine = (event) => {
-    console.log(event)
+  addRoutine = (routine) => {
+    console.log(routine)
+    fetch(API_ROOT + '/users/1/routines', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Accepts: 'application/json'
+      },
+      body: JSON.stringify(routine)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState(prev => {
+      return {routines: [...prev.routines, data]}
+      })
+    })
   }
+
 
   render() {
     return (
       <div className='routine-collection'>
-        Routine Form:
         <RoutineForm onAddRoutine={this.addRoutine}/>
         <br />
         Routines:
