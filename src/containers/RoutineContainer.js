@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { API_ROOT } from './Constraints'
 import RoutineCard from '../components/RoutineCard';
 import RoutineForm from '../components/RoutineForm'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 class RoutineContainer extends Component {
@@ -47,7 +48,7 @@ class RoutineContainer extends Component {
     })
   }
 
-  // DELETE
+  // DELETE Routine
   deleteRoutine = (routineId) => {
     fetch(`http://localhost:3000/api/v1/users/2/routines/${routineId}`, {method: 'DELETE'})
     .then(() => {
@@ -61,10 +62,13 @@ class RoutineContainer extends Component {
   render() {
     return (
       <div className='routine-collection'>
-        <RoutineForm onAddRoutine={this.addRoutine}/>
-        <br />
-        Routines:
-        {this.renderRoutines()}
+        <Router>
+          <Route exact path='/routine/form' render={() => console.log('routine/form')} />
+          <RoutineForm onAddRoutine={this.addRoutine} />
+          <br/>
+          Routines:
+          {this.renderRoutines()}
+        </Router>
       </div>
     )
   }

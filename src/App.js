@@ -1,18 +1,23 @@
 import React from 'react'; //include React, { Component }
+import NavBar from './components/NavBar'
 // import Home from './components/Home';
 // import Login from './components/Login';
 // import Signup from './components/Signup';
 // import Error from './components/Error';
 import RoutineContainer from './containers/RoutineContainer'
 import ExerciseContainer from './containers/ExerciseContainer'
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const App = () =>  {
+  // Do I want to show all Routines
   return (
     <div>
-      <RoutineContainer />
-      <ExerciseContainer />
-    </div>
+      <Router>
+        <NavBar />
+        <Route /* exact */ path="/routines" component={RoutineContainer} />
+        <Route path={'/exercises'} component={ExerciseContainer} />
+    </Router>
+      </div>
     );
 };
 
