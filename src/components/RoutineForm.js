@@ -48,6 +48,8 @@ class RoutineForm extends Component {
       exercises_attributes: this.state.selectedExercises
       }
     this.props.onAddRoutine(routine)
+    this.setState(INITIAL_STATE)
+    this.fetchExercises()
   }
 
   fetchExercises = () => {
