@@ -29,7 +29,7 @@ class ExerciseContainer extends Component {
   render() {
     return (
       <div className='exercise-collection'>
-        Exercises
+        <h3>Exercises:</h3>
         {this.renderExercises()}
       </div>
     )

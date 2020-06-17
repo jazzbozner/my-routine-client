@@ -82,7 +82,7 @@ class RoutineForm extends Component {
     return (
       <div className="form-container">
         <form className="add-routine-form" onSubmit={this.handleSubmit}>
-          <h3>New Routine</h3>
+          <h3>New Routine:</h3>
           <input 
             onChange={this.handleChange} 
             value={this.state.name} 

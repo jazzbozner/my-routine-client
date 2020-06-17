@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { API_ROOT } from './Constraints'
 import RoutineCard from '../components/RoutineCard';
 import RoutineForm from '../components/RoutineForm'
+import WorkoutCard from '../components/WorkoutCard'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 class RoutineContainer extends Component {
 
   state = {
-    routines:[]
+    routines:[],
+    routineExercises: []
   }
 
   componentDidMount() {
@@ -25,13 +27,64 @@ class RoutineContainer extends Component {
   renderRoutines = () => {
     const { routines } = this.state
     return routines.map(routine => {
-      return <RoutineCard routine={routine} key={routine.id} workouts={routine.workouts} deleteRoutine={this.deleteRoutine}/>
+      return <RoutineCard 
+        routine={routine} 
+        key={routine.id} 
+        workouts={routine.workouts} 
+        onDeleteRoutine={this.deleteRoutine} 
+        onShowRoutine={this.showRoutine}
+      />
     })
   }
 
-  // Post Routine
+  showRoutine = (routineId) => {
+    const { routines } = this.state
+    return routines.map(routine => {
+      if (routine.id === routineId) {
+        this.setState({routineExercises: routine.workouts}, this.renderWorkouts)
+      }
+    })
+  }
+
+  renderWorkouts = () => {
+    const { routineExercises } = this.state
+    return routineExercises.map(workout => {
+      return <WorkoutCard 
+        workout={workout}
+        key={workout.id}
+        onEditWorkout={this.editWorkout}
+      />
+    })
+  }
+
+  // PATCH Workout
+  editWorkout = (workout) => {
+    // Patch Workout
+    fetch(API_ROOT + `users/2/workouts/${workout.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+        Accepts: 'application/json'
+      },
+      body: JSON.stringify({
+        reps: workout.reps,
+        sets: workout.sets,
+        weight: workout.weight
+      })
+    })
+    .then(resp => resp.json())
+    .then(() => {
+        this.setState(prevState => {
+          return { 
+            routineExercises: [...prevState.routineExercises],
+            routines: [...prevState.routines]
+          }
+        })
+      })
+    }
+
+  // POST Routine
   addRoutine = (routine) => {
-    console.log(routine)
     fetch(API_ROOT + '/routines', {
       method: 'POST',
       headers: {
@@ -50,7 +103,7 @@ class RoutineContainer extends Component {
 
   // DELETE Routine
   deleteRoutine = (routineId) => {
-    fetch(`http://localhost:3000/api/v1/users/2/routines/${routineId}`, {method: 'DELETE'})
+    fetch(API_ROOT + `/users/2/routines/${routineId}`, {method: 'DELETE'})
     .then(() => {
       this.setState(prevState => {
         return {routines: prevState.routines.filter(routine => routine.id !== routineId)}
@@ -63,11 +116,16 @@ class RoutineContainer extends Component {
     return (
       <div className='routine-collection'>
         <Router>
-          <Route exact path='/routine/form' render={() => console.log('routine/form')} />
-          <RoutineForm onAddRoutine={this.addRoutine} />
-          <br/>
-          Routines:
-          {this.renderRoutines()}
+          <div>
+            {this.renderWorkouts()}
+          </div>
+          <div>
+            <RoutineForm onAddRoutine={this.addRoutine} />
+          </div>
+          <div>
+            <h3>Routines: </h3>
+            {this.renderRoutines()}
+          </div>
         </Router>
       </div>
     )

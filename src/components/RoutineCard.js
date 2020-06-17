@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class RoutineCard extends Component {
 
-  handleClick = () => {
-    console.log(this.props.routine)
+  handleShowRoutine = (event) => {
+    this.props.onShowRoutine(event)
   }
 
   handleDelete = (id) => {
@@ -15,7 +15,7 @@ class RoutineCard extends Component {
     const { name, intensity, description, id} = routine
     return (
       <div className="card" >
-        <h3 onClick={this.handleClick}>{name}</h3>
+        <h3 onClick={() => this.handleShowRoutine(id)}>{name}</h3>
         <div>intensity: {intensity}</div>
         <p>Description: {description}</p>
       <button onClick={()=> this.handleDelete(id)}>Delete</button>
