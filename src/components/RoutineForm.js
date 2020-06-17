@@ -44,7 +44,7 @@ class RoutineForm extends Component {
       name: this.state.name,
       description: this.state.description,
       intensity: this.state.intensity,
-      user_id: 1,
+      user_id: 2,
       exercises_attributes: this.state.selectedExercises
       }
     this.props.onAddRoutine(routine)
@@ -63,10 +63,10 @@ class RoutineForm extends Component {
         <label key={exercise.id}>
               {exercise.name}
             <input 
-              onChange={this.handleChecked}
+              onClick={this.handleChecked}
               type="checkbox" 
               value={exercise.name} 
-              name={exercise.name} 
+              name='exercise-select' 
               placeholder="Description..." 
               className="input-text"
             />

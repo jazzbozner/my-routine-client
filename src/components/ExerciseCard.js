@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class ExerciseCard extends Component {
 
   handleClick = () => {
-    console.log(this.props.exercise.name)
+    console.log(this.props.exercise)
   }
 
   render() {
