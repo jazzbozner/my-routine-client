@@ -6,14 +6,19 @@ class RoutineCard extends Component {
     console.log(this.props.routine)
   }
 
+  handleDelete = (event) => {
+    this.props.deleteRoutine(event)
+  }
+
   render() {
     const { routine } = this.props
-    const { name, intensity, description} = routine
+    const { name, intensity, description, id} = routine
     return (
-      <div className="card" onClick={this.handleClick}>
-        <h3>{name}</h3>
+      <div className="card" >
+        <h3 onClick={this.handleClick}>{name}</h3>
         <div>intensity: {intensity}</div>
         <p>Description: {description}</p>
+      <button onClick={()=> this.handleDelete(id)}>Delete</button>
       </div>
     );
   }

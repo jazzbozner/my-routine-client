@@ -16,7 +16,7 @@ class RoutineContainer extends Component {
 
   // Hard coded user.id
   fetchRoutines = () => {
-    fetch(API_ROOT + '/users/1/routines')
+    fetch(API_ROOT + '/users/2/routines')
     .then(resp => resp.json())
     .then(data => this.setState({routines:data}))
   }
@@ -24,7 +24,7 @@ class RoutineContainer extends Component {
   renderRoutines = () => {
     const { routines } = this.state
     return routines.map(routine => {
-      return <RoutineCard routine={routine} key={routine.id} workouts={routine.workouts} />
+      return <RoutineCard routine={routine} key={routine.id} workouts={routine.workouts} deleteRoutine={this.deleteRoutine}/>
     })
   }
 
@@ -41,10 +41,19 @@ class RoutineContainer extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-      console.log(data)
-      // this.setState(prev => {
-      // return {routines: [...prev.routines, data]}
-      // })
+      this.setState(prev => {
+      return {routines: [...prev.routines, data]}
+      })
+    })
+  }
+
+  // DELETE
+  deleteRoutine = (routineId) => {
+    fetch(`http://localhost:3000/api/v1/users/2/routines/${routineId}`, {method: 'DELETE'})
+    .then(() => {
+      this.setState(prevState => {
+        return {routines: prevState.routines.filter(routine => routine.id !== routineId)}
+      })
     })
   }
 
