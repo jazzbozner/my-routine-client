@@ -11,7 +11,6 @@ class WorkoutCard extends Component {
   }
 
   handleChange = (event) => {
-    console.log(event.target.value)
     this.setState({
       [event.target.name]:parseInt(event.target.value)
     })
@@ -27,9 +26,6 @@ class WorkoutCard extends Component {
     const { exercise_name} = workout
     return (
       <div className="card" >
-        <h3>
-          Workouts:
-        </h3>
         <form className='edit-workout-form'onSubmit={this.handleSubmit}>
           <h3> {exercise_name}</h3>
           <label>Sets</label>

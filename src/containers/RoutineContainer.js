@@ -5,7 +5,6 @@ import RoutineForm from '../components/RoutineForm'
 import WorkoutCard from '../components/WorkoutCard'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-
 class RoutineContainer extends Component {
 
   state = {
@@ -59,7 +58,7 @@ class RoutineContainer extends Component {
 
   // PATCH Workout
   editWorkout = (workout) => {
-    // Patch Workout
+    const { routines } = this.state
     fetch(API_ROOT + `users/2/workouts/${workout.id}`, {
       method: 'PATCH',
       headers: {
@@ -73,15 +72,25 @@ class RoutineContainer extends Component {
       })
     })
     .then(resp => resp.json())
-    .then(() => {
-        this.setState(prevState => {
-          return { 
-            routineExercises: [...prevState.routineExercises],
-            routines: [...prevState.routines]
-          }
-        })
+    .then(data => {
+      console.log(data)
+      console.log(routines)
+      let newRoutines = routines.map(routine => {
+        if (routine.id == data.routine_id) {
+          routine.workouts.map(item => {
+            if (item.id == data.id) {
+              item = data
+            }
+            return item
+          })
+        }
+        // debugger
+        return routine
       })
-    }
+      // debugger
+      this.setState({routines: newRoutines})
+    })
+  }
 
   // POST Routine
   addRoutine = (routine) => {
@@ -116,6 +125,7 @@ class RoutineContainer extends Component {
     return (
       <div className='routine-collection'>
         <Router>
+        <h3>Workouts: </h3>
           <div>
             {this.renderWorkouts()}
           </div>
