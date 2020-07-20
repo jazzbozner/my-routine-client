@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   exercises: [],
   selectedExercises: []
 }
+
 class RoutineForm extends Component {
 
   state = INITIAL_STATE
@@ -81,7 +82,7 @@ class RoutineForm extends Component {
   render() {
     return (
       <div className="form-container">
-        <form className="add-routine-form" onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <h3>New Routine:</h3>
           <input 
             onChange={this.handleChange} 

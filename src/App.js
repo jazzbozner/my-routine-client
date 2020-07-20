@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 const App = () =>  {
   // Do I want to show all Routines
   return (
-    <div>
+    <div className='parent'>
       <Router>
         <NavBar />
         <Route /* exact */ path="/routines" component={RoutineContainer} />

@@ -25,10 +25,12 @@ class WorkoutCard extends Component {
     const { workout } = this.props
     const { exercise_name} = workout
     return (
-      <div className="card" >
+      <div className="workout-card" >
         <form className='edit-workout-form'onSubmit={this.handleSubmit}>
           <h3> {exercise_name}</h3>
+          <br/>
           <label>Sets</label>
+          <br/>
           <input 
             value={this.state.sets}
             onChange={this.handleChange} 
@@ -36,7 +38,9 @@ class WorkoutCard extends Component {
             name='sets'
             className='input-text'
             ></input>
+          <br/>
           <label>Reps</label>
+          <br/>
           <input 
             value={this.state.reps}
             onChange={this.handleChange} 
@@ -44,7 +48,9 @@ class WorkoutCard extends Component {
             name='reps'
             className='input-text'
             ></input>
+          <br/>
           <label>Weight</label>
+          <br/>
           <input 
             value={this.state.weight}
             onChange={this.handleChange} 
@@ -52,6 +58,7 @@ class WorkoutCard extends Component {
             name='weight'
             className='input-text'
             ></input>
+          <br/>
           <input 
             type="submit" 
             name="submit" 

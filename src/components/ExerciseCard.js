@@ -10,7 +10,7 @@ class ExerciseCard extends Component {
     const { exercise } = this.props
     const { name, muscle_target, description} = exercise
     return (
-      <div className="card" onClick={this.handleClick}>
+      <div className="list-card" onClick={this.handleClick}>
         <h3>{name}</h3>
         <div>{muscle_target}</div>
         <p>Description: {description}</p>

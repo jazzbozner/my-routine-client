@@ -72,29 +72,31 @@ class RoutineContainer extends Component {
       })
     })
     .then(resp => resp.json())
-    .then(data => {
-      console.log(data)
-      console.log(routines)
-      let newRoutines = routines.map(routine => {
-        if (routine.id == data.routine_id) {
-          routine.workouts.map(item => {
-            if (item.id == data.id) {
-              item = data
-            }
-            return item
-          })
-        }
-        // debugger
-        return routine
-      })
-      // debugger
-      this.setState({routines: newRoutines})
-    })
+    // .then(data => {
+    //   console.log(data)
+    //   console.log(routines)
+    //   let newRoutines = routines.map(routine => {
+    //     if (routine.id === data.routine_id) {
+    //       return routine.workouts.map(item => {
+    //         if (item.id == data.id) {
+    //           item = data
+    //         }
+    //         return item
+    //       })
+    //     } else {
+    //     // debugger
+    //     return routine
+    //     }
+    //   })
+    //   // debugger
+    //   this.setState({routines: newRoutines})
+    // })
   }
 
   // POST Routine
   addRoutine = (routine) => {
-    fetch(API_ROOT + '/routines', {
+    console.log(routine)
+    fetch(API_ROOT + 'users/2/routines', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -104,6 +106,7 @@ class RoutineContainer extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
+      console.log(data)
       this.setState(prev => {
       return {routines: [...prev.routines, data]}
       })
@@ -133,7 +136,7 @@ class RoutineContainer extends Component {
             <RoutineForm onAddRoutine={this.addRoutine} />
           </div>
           <div>
-            <h3>Routines: </h3>
+            <h3 className='routine-container'>Routines: </h3>
             {this.renderRoutines()}
           </div>
         </Router>
